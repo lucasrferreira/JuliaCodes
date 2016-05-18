@@ -85,11 +85,16 @@ type OMahonyModel
     rating_averaged = zeros(length(rows))
     for i=1 : length(rows)
       rating_averaged[i] = mean(nonzeros(data_matrix[i,:]))
-
       # Aproveitar esse loop para outros calculos
+
     end
 
     return this
+  end
+
+  function significanceNeighbour(data_matrix::SparseMatrixCSC, index)
+
+    return zeros(35)
   end
 end
 

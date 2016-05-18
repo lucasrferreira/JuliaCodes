@@ -19,6 +19,8 @@ type test
 end
 
 v = test()
-v.func()
-test
+v.func
+v.val
 func
+
+zeros(Int, 10)
