@@ -73,7 +73,7 @@ type OMahonyModel
   weight::Function
   significance::Function
 
-  function OMahonyModel(data::Dataset, th::Real)
+  function OMahonyModel(data::Dataset, th::Real, neighbourSize::Int = 35)
     this = new()
     data_matrix = data.getMatrix()
 
@@ -92,10 +92,16 @@ type OMahonyModel
     return this
   end
 
-  function significanceNeighbour(data_matrix::SparseMatrixCSC, index)
-
-    return zeros(35)
+  # Para usuários com menos de 50 coavaliados fazer n/50
+  # Para usuários com mais de 50 usar 1.
+  function significance(userItemArray, i, j)
+    corating_itens = intersect(getItens(userItemArray, i), getItens(userItemArray, j))
+    n = length(corating_itens)
+    return n < 50 ? n/50 : 1
   end
 end
 
+function getItens(A, user)
+  A[find(x-> x==user, A[:,1]),:][:,2]
+end
 dataset = Dataset()

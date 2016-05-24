@@ -7,11 +7,12 @@ type Dataset
   size::Int32
   preferences::Array
 
+	getArray::Function
   getMatrix::Function
 
   function Dataset()
     this = new()
-    local filename = "datasets/user.data"
+    filename = "datasets/user.data"
     if !isfile(filename)
       if !isfile("/datasets/user.data")
         if isfile("../datasets/user.data")
@@ -36,6 +37,9 @@ type Dataset
     this.getMatrix = function()
         return createMatrix(this);
     end
+		this.getArray = function()
+      	return array(this.file[:,:])
+    end
 
     return this
   end
@@ -56,7 +60,9 @@ type Dataset
     this.getMatrix = function()
         return createMatrix(this);
     end
-
+		this.getArray = function()
+      	return array(this.file[this.test_index,:])
+    end
     return this
   end
 end
