@@ -8,7 +8,6 @@ type EuclideanDistMatrix
   distanceMatrix
   function EuclideanDistMatrix(itens_features)
     this = new()
-
     this.itens_features = itens_features
     this.num_of_itens = size(itens_features)[1]
     this.num_of_features = size(itens_features)[2]
